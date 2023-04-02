@@ -19,7 +19,7 @@ def BaseTime():
 
     hour = "0" + str(hour) if hour < 10 else str(hour)
 
-    return date, hour + "00", now.strftime("%Y%m%d"), now.strftime("%H%M")
+    return date, hour + "00", now.strftime("%Y%m%d"), now.strftime("%H%M"), now
 
 
 class GetResponse:
@@ -27,7 +27,9 @@ class GetResponse:
         self.fixed = (
             f"{url}{feature}?serviceKey={serviceKey}&dataType=JSON&numOfRows=2000&nx={nx}&ny={ny}"
         )
-        self.base_date, self.base_time, self.now_date, self.now_time = BaseTime()
+        self.base_date, self.base_time, self.now_date, self.now_time, fcst_time = BaseTime()
+        fcst_time = fcst_time + datetime.timedelta(hours=1)
+        self.fcst_now = (fcst_time.strftime("%Y%m%d"), fcst_time.strftime("%H00"))
         self.run()
 
     def Request(self, date, time):
