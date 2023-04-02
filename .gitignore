@@ -3,3 +3,4 @@ venv/
 Keys.py
 __pycache__/
 data/
+static/
