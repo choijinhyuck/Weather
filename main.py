@@ -1,4 +1,7 @@
-from . import city_table, Keys, GetResponse
+if __name__ == "__main__":
+    import city_table, Keys, GetResponse
+else:
+    from . import city_table, Keys, GetResponse
 
 url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/"
 feature = "getVilageFcst"
@@ -14,6 +17,11 @@ def GetWeather(si, gun, dong):
         print("유효하지 않은 주소입니다.")
         raise
 
+
+if __name__ == "__main__":
+    si, gun, dong = input("시 군 구 띄어쓰기로 입력하세요").split()
+    fcsts = GetWeather(si, gun, dong)
+    print(fcsts.fcst["TMP"])
 
 ## 함수 테스트
 # test = GetWeather("대전광역시", "유성구", "신성동")
