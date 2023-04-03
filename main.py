@@ -1,4 +1,4 @@
-import city_table, Keys, GetResponse
+from . import city_table, Keys, GetResponse
 
 url = "http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/"
 feature = "getVilageFcst"
@@ -12,7 +12,7 @@ def GetWeather(si, gun, dong):
         return contents
     except:
         print("유효하지 않은 주소입니다.")
-        return False
+        raise
 
 
 ## 함수 테스트
