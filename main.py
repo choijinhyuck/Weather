@@ -21,7 +21,7 @@ def GetWeather(si, gun, dong):
 if __name__ == "__main__":
     si, gun, dong = input("시 군 구 띄어쓰기로 입력하세요").split()
     fcsts = GetWeather(si, gun, dong)
-    print(fcsts.fcst["TMP"])
+    print(fcsts.fcst["SKY"])
 
 ## 함수 테스트
 # test = GetWeather("대전광역시", "유성구", "신성동")
