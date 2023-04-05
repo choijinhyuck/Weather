@@ -1,4 +1,4 @@
-import datetime, requests, json
+import datetime, requests, json, time
 
 
 def BaseTime():
@@ -7,9 +7,8 @@ def BaseTime():
     date = now.strftime("%Y%m%d")
     hour = int(now.strftime("%H"))
     minute = now.strftime("%M")
+    hour -= 1
 
-    if int(minute) < 20:
-        hour -= 1
     if hour < 2:
         date = now.date() + datetime.timedelta(days=-1)
         date = date.strftime("%Y%m%d")
@@ -59,11 +58,11 @@ class GetResponse:
             return False
         result = json.loads(response.text)
         try:
-            # print(json.dumps(result, indent=4)) # json 내용 구조적으로 확인용
+            # print(json.dumps(result, indent=4))  # json 내용 구조적으로 확인용
             contents = result["response"]["body"]["items"]["item"]  # list 자료형 결과를 반환
             return contents
         except:
-            print("Error message: Invalid request")
+            print(f"Error message: Invalid request {date} {time}")
             return False
 
     def merge(self):
@@ -76,6 +75,7 @@ class GetResponse:
             )
             yesterday = yesterday.strftime("%Y%m%d")
             pre_contents = self.Request(yesterday, "2300")
+            time.sleep(1)
             post_contents = self.Request(self.base_date, self.base_time)
 
             temp_pre = []
@@ -85,7 +85,6 @@ class GetResponse:
                         break
                     else:
                         temp_pre.append(pre_content)
-
             return temp_pre + post_contents
 
     def run(self):
