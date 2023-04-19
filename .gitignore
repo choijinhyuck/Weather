@@ -2,4 +2,3 @@ venv/
 .vscode/
 Keys.py
 __pycache__/
-data/
